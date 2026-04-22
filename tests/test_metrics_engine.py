@@ -7,7 +7,7 @@ import json
 import pytest
 
 from terrarium.metrics.engine import MetricsEngine
-from terrarium.ecosystem.model import build_ecosystem
+from terrarium.ecosystem.builder import build_ecosystem
 
 
 class TestMetricsEngine:
@@ -55,7 +55,9 @@ class TestMetricsEngine:
         """Scanning computes complexity."""
         with tempfile.TemporaryDirectory() as tmpdir:
             with open(os.path.join(tmpdir, "complex.py"), "w") as f:
-                f.write("def f(x):\n    if x:\n        for i in range(x):\n            if i > 5:\n                pass\n")
+                f.write(
+                    "def f(x):\n    if x:\n        for i in range(x):\n            if i > 5:\n                pass\n"
+                )
 
             engine = MetricsEngine(tmpdir)
             project = engine.scan()

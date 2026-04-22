@@ -4,7 +4,8 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 from .organisms import Vitality, VITALITY_COLORS, ANSI_RESET, ANSI_BOLD
-from .model import Organism, CHURN_THRESHOLD, COMPLEXITY_THRESHOLD, COVERAGE_THRESHOLD
+from .model import Organism
+from .health_scoring import CHURN_THRESHOLD, COMPLEXITY_THRESHOLD, COVERAGE_THRESHOLD
 
 
 @dataclass
@@ -96,9 +97,7 @@ def diagnose(organism: Organism) -> Diagnosis:
         )
         diag.prognosis = "Will continue to decay. Removal recommended."
     elif is_deprecated:
-        diag.diagnosis_text = (
-            "This module is deprecated and decaying. It should not be used for new code."
-        )
+        diag.diagnosis_text = "This module is deprecated and decaying. It should not be used for new code."
         diag.treatment = (
             "Remove or replace with the recommended alternative. "
             "Update all callers to use the new API."
@@ -159,9 +158,7 @@ def diagnose(organism: Organism) -> Diagnosis:
         )
         diag.prognosis = "Good prognosis — testing is straightforward to add."
     elif has_bugs:
-        diag.diagnosis_text = (
-            "This module has active bugs that need attention."
-        )
+        diag.diagnosis_text = "This module has active bugs that need attention."
         diag.treatment = "Investigate and fix reported bugs. Add regression tests."
         diag.prognosis = "Will improve once bugs are resolved."
     elif organism.health >= 80:
@@ -169,7 +166,9 @@ def diagnose(organism: Organism) -> Diagnosis:
         diag.treatment = "No treatment needed. Continue current practices."
         diag.prognosis = "Excellent. Maintain current health practices."
     else:
-        diag.diagnosis_text = "This module has some minor issues but is generally stable."
+        diag.diagnosis_text = (
+            "This module has some minor issues but is generally stable."
+        )
         diag.treatment = "Monitor for changes. Address symptoms as they arise."
         diag.prognosis = "Good with minor attention."
 

@@ -10,16 +10,14 @@ from terrarium.ecosystem.organisms import (
     health_to_vitality,
     get_emoji,
 )
-from terrarium.ecosystem.model import (
-    Organism,
-    Ecosystem,
+from terrarium.ecosystem.model import Organism, Ecosystem
+from terrarium.ecosystem.health_scoring import (
     compute_health_score,
-    build_organism,
-    build_ecosystem,
     CHURN_THRESHOLD,
     COMPLEXITY_THRESHOLD,
     COVERAGE_THRESHOLD,
 )
+from terrarium.ecosystem.builder import build_organism, build_ecosystem
 
 
 class TestHealthToVitality:

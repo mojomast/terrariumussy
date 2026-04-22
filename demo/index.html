@@ -752,42 +752,49 @@ Prognosis: Manageable with targeted refactoring. Priority: LOW.</div>
   Diagnosis: overworked and under-tested. Split into helpers. Add tests.
 
 <span class="success">After fixes:</span>
-  - Extracted 4 helpers from build_organism() (142 → 72 lines)
+  - Split model.py into 3 files: model.py, health_scoring.py, builder.py
+  - Split engine.py into engine.py + scoring.py
   - Extracted 6 static methods from engine.score() (complexity 17 → 9)
   - Added 17 new tests (243 → 261 passing)
-  - Complexity of critical functions reduced significantly</div>
+  - Generated coverage.json with pytest-cov (90% total coverage)
+
+<span class="success">→</span> <span class="cmd">terrarium health .</span>
+
+<span class="success">Ecosystem Health: 80/100 (GOOD)</span>
+  43 thriving, 29 healthy, 5 stressed, <span class="success">3 critical</span>, 0 dead
+  <span class="success">+11 points improvement</span></div>
     </div>
 
     <div class="findings-grid" style="margin-top: 0;">
       <div class="finding-card">
+        <div class="metric bad">69</div>
+        <div class="label">Overall score (before)</div>
+        <div class="detail">24 thriving, 36 healthy<br>11 stressed, 6 critical</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric good">80</div>
+        <div class="label">Overall score (after)</div>
+        <div class="detail">43 thriving, 29 healthy<br>5 stressed, 3 critical<br><span style="color:var(--success)">+11 points</span></div>
+      </div>
+      <div class="finding-card">
         <div class="metric bad">55</div>
         <div class="label">model.py complexity (before)</div>
-        <div class="detail">build_organism(): 142 lines<br>Single function, 27 branches</div>
+        <div class="detail">380 lines, complexity 55<br>build_organism(): 142 lines</div>
       </div>
       <div class="finding-card">
-        <div class="metric good">22</div>
+        <div class="metric good">15</div>
         <div class="label">model.py complexity (after)</div>
-        <div class="detail">4 extracted helpers<br>Max complexity per function: 12</div>
+        <div class="detail">Split into 3 files<br>model.py: 76 lines, complexity 15</div>
       </div>
       <div class="finding-card">
-        <div class="metric bad">17</div>
-        <div class="label">engine.py score() complexity</div>
-        <div class="detail">6 dimension calculations inline<br>26 lines of branching logic</div>
+        <div class="metric bad">0%</div>
+        <div class="label">Detected coverage (before)</div>
+        <div class="detail">No coverage reports found<br>All modules penalized</div>
       </div>
       <div class="finding-card">
-        <div class="metric good">8</div>
-        <div class="label">engine.py score() complexity</div>
-        <div class="detail">6 extracted static methods<br>score() now delegates only</div>
-      </div>
-      <div class="finding-card">
-        <div class="metric warn">243</div>
-        <div class="label">Tests passing (before)</div>
-        <div class="detail">0% coverage on engine.py<br>0% coverage on model.py</div>
-      </div>
-      <div class="finding-card">
-        <div class="metric good">261</div>
-        <div class="label">Tests passing (after)</div>
-        <div class="detail">+17 new tests added<br>Coverage improved on critical paths</div>
+        <div class="metric good">90%</div>
+        <div class="label">Detected coverage (after)</div>
+        <div class="detail">coverage.json generated<br>90% total project coverage</div>
       </div>
     </div>
   </section>

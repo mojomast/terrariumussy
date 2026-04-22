@@ -5,7 +5,8 @@ import subprocess
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 
-from ..ecosystem.model import Ecosystem, Organism, build_ecosystem
+from ..ecosystem.model import Ecosystem, Organism
+from ..ecosystem.builder import build_ecosystem
 from ..ecosystem.organisms import Vitality, VITALITY_COLORS, ANSI_RESET
 from ..metrics.models import ProjectMetrics, ModuleMetrics
 from ..metrics.engine import MetricsEngine
@@ -89,10 +90,12 @@ def get_git_history(
 
     history = []
     for key in sorted(month_counts.keys()):
-        history.append({
-            "month": key,
-            "count": month_counts[key],
-        })
+        history.append(
+            {
+                "month": key,
+                "count": month_counts[key],
+            }
+        )
 
     return history
 
@@ -117,7 +120,10 @@ def render_seasons_view(
     # Classify each organism's season
     season_counts = {"spring": 0, "summer": 0, "autumn": 0, "winter": 0}
     season_organisms: Dict[str, List[Organism]] = {
-        "spring": [], "summer": [], "autumn": [], "winter": [],
+        "spring": [],
+        "summer": [],
+        "autumn": [],
+        "winter": [],
     }
 
     for organism in ecosystem.organisms.values():
@@ -131,6 +137,7 @@ def render_seasons_view(
         for s in organism.symptoms:
             if "churn" in s.lower():
                 import re
+
                 match = re.search(r"([\d.]+)x", s)
                 if match:
                     churn_rate = float(match.group(1))

@@ -8,7 +8,7 @@ import click
 
 from . import __version__
 from .metrics.engine import MetricsEngine
-from .ecosystem.model import build_ecosystem
+from .ecosystem.builder import build_ecosystem
 from .ecosystem.diagnosis import diagnose as diagnose_organism
 from .adapters import load_adapters, merge_health_states
 from .renderers.terminal import render_terrarium, render_health_summary
